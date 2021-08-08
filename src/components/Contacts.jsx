@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Contact from './Contact';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GET_CONTACT } from '../actions/types';
+import { getContacts, deleteContacts } from './../actions/contactActions'
 
 // controler component là gì
 class Contacts extends Component {
@@ -30,14 +30,14 @@ class Contacts extends Component {
 
     // khi data được update nó sẽ fill lại và render ra data mới
     render() {
-        const { contacts } = this.props;
+        const { contacts, deleteContacts } = this.props;
         return (
             <React.Fragment>
                 {contacts.map(contact => <Contact 
                                             key={contact.id}
                                             contact={contact}
                                             // props deleteClickHandler được khai báo ở đây
-                                            deleteClickHandler={this.deleteContact.bind(this, contact.id)}
+                                            deleteClickHandler={deleteContacts.bind(this, contact.id)}
                                         /> )}
             </React.Fragment>
         )
@@ -53,8 +53,8 @@ const mapStatetoProps = (state) => ({
     contacts: state.contact.contacts
 });
 
-const mapDispatchtoProps = (dispatch) => ({
-    getContacts: () => dispatch({type: GET_CONTACT})
-});
+// const mapDispatchtoProps = (dispatch) => ({
+//     getContacts: () => dispatch({type: GET_CONTACT})
+// });
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(Contacts);
+export default connect(mapStatetoProps, { getContacts, deleteContacts })(Contacts);

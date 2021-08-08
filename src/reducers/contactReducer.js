@@ -1,4 +1,4 @@
-import { GET_CONTACT } from "../actions/types";
+import { DELETE_CONTACT, GET_CONTACT } from "../actions/types";
 
 // trang thai state ban đầu
 const initialState = {
@@ -28,9 +28,16 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_CONTACT: 
-        return {
-            ...state
-        }
+            return {
+                ...state
+            }
+        case DELETE_CONTACT: 
+            return {
+                ...state,
+                contacts: state.contacts.filter(contact => 
+                    contact.id !== action.payload)             
+            }
+        
         default:
             return state;
     }
