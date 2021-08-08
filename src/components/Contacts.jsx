@@ -33,12 +33,14 @@ class Contacts extends Component {
         const { contacts, deleteContacts } = this.props;
         return (
             <React.Fragment>
+                <div className="container">
                 {contacts.map(contact => <Contact 
                                             key={contact.id}
                                             contact={contact}
                                             // props deleteClickHandler được khai báo ở đây
                                             deleteClickHandler={deleteContacts.bind(this, contact.id)}
                                         /> )}
+                </div>
             </React.Fragment>
         )
     }

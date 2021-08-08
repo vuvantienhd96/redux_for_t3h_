@@ -9,15 +9,22 @@ import Header from './components/Header';
 import { Provider } from 'react-redux';
 import store from './store'
 
+// Router
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import AddContact2 from './components/AddContacts';
+
 class App extends Component {
   render(){
     return (
       <React.Fragment>
         <Provider store={store}>
-          <Header branding='Contact Manager'/>
-            <div className="container">
-              <Contacts />
-            </div>
+          <Router>
+            <Header branding='Contact Manager'/>
+            <Switch>
+                <Route exact path="/" component={Contacts}/>
+                <Route exact path="/addcontact" component={AddContact2}/>
+              </Switch>
+          </Router>
         </Provider>
         </React.Fragment>
     )
